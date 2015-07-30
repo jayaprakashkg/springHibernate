@@ -96,12 +96,12 @@ $( document ).ready(function() {
   
   </tbody>
 </table>
-
+<div id="errormsg">
+	&nbsp;
+</div>
 </form>
 
-<div id="error">
-&nbsp;
-</div>
+
 
 </div>
 
