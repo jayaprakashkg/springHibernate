@@ -15,9 +15,6 @@ function validateAndSubmit()
 	rePassWord = $("#repass").val();
 	dob = $("#birthday").val();
 	gender = $('#gender option:selected').val();
-	
-	//alert(firstName +":"+LastName+":"+mailId+":"+passWord+":"+rePassWord+":"+dob+":"+gender);
-	
 	if(validateForm(firstName, "First Name"))
 	{
 		if(validateForm(lastName, "Last Name"))
@@ -33,7 +30,6 @@ function validateAndSubmit()
 							if(passWord.length != 0 && (passWord == rePassWord)) 
 							{								
 								//$("#regForm").submit();
-								//$('#regForm').hide();
 								$('#loadingss').show();
 								submitRegistForm();
 							}
@@ -52,10 +48,6 @@ function validateAndSubmit()
 			}
 		}
 	}
-	
-	//$("#regForm").submit();
-	
-//	error(1,"All fields are required.");
 }
 
 function validateGender(valueSelected)
@@ -109,10 +101,9 @@ function submitRegistForm()
 	  success: function(jsonResp) {
 		  
 		  	$('#loadingss').hide();
-		  	//$('#div-regForm').show();
-		 // $("#regForm").reset();
 		  alert(jsonResp.message);
 		  document.getElementById("regForm").reset();
+		  $('#errormsg').html("");
 		},
     	error: function(e) {
     		//alert(e);
@@ -120,54 +111,12 @@ function submitRegistForm()
 	});
 	return true;
 }
-/*$(document).ready(function(){
-	
-	$('#regForm').submit(function(e) {
 
-		register();
-		e.preventDefault();
-		
-	});
-	
-});
-
-
-function register()
-{
-	hideshow('loading',1);
-	error(0);
-	
-	$.ajax({
-		type: "POST",
-		url: "submit.php",
-		data: $('#regForm').serialize(),
-		dataType: "json",
-		success: function(msg){
-			
-			if(parseInt(msg.status)==1)
-			{
-				window.location=msg.txt;
-			}
-			else if(parseInt(msg.status)==0)
-			{
-				error(1,msg.txt);
-			}
-			
-			hideshow('loading',0);
-		}
-	});
-
-}
-*/
-
-function hideshow(el,act)
-{
-	if(act) $('#'+el).css('visibility','visible');
-	else $('#'+el).css('visibility','hidden');
-}
 
 function error(act,txt)
 {
-	hideshow('error',act);
-	if(txt) $('#error').html(txt);
+	var modified = "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+			"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='red'>"+txt+"</font>";
+	$('#errormsg').html(modified);
 }
